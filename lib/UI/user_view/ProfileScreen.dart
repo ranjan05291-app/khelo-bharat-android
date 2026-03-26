@@ -1,198 +1,222 @@
 import 'package:flutter/material.dart';
-import 'package:ipl_app_flutter26/UI/user_view/LoginScreen.dart';
-// import 'login_page.dart'; // apna login page import karo
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-
-  String userName = "Ranjan Kumar";
-  String email = "ranjan@email.com";
-  int walletBalance = 1250;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B1A2A),
+      backgroundColor: const Color(0xFF0B1023),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              /// PROFILE HEADER
-              Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                // 🔙 Top Bar
+                Row(
+                  children: const [
+                    Icon(Icons.arrow_back, color: Colors.white),
+                    SizedBox(width: 10),
+                    Text(
+                      "My Profile",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                child: Container(
-                  padding: const EdgeInsets.all(16),
+
+                const SizedBox(height: 20),
+
+                // 👤 Profile Card
+                Container(
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF13263A),
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF1A2140),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
                       const CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage("assets/profile.png"),
+                        radius: 35,
+                        backgroundColor: Colors.orange,
+                        child: Text("R",
+                            style:
+                            TextStyle(color: Colors.white, fontSize: 24)),
                       ),
-                      const SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            userName,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                      const SizedBox(height: 10),
+                      const Text("Ranjan",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 5),
+                      const Text("+91 7827206419",
+                          style: TextStyle(color: Colors.grey)),
+
+                      const SizedBox(height: 20),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          Column(
+                            children: [
+                              Text("₹0.00",
+                                  style: TextStyle(
+                                      color: Colors.yellow,
+                                      fontWeight: FontWeight.bold)),
+                              SizedBox(height: 5),
+                              Text("Balance",
+                                  style: TextStyle(color: Colors.grey))
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            email,
-                            style: const TextStyle(color: Colors.white60),
+                          Column(
+                            children: [
+                              Text("0",
+                                  style: TextStyle(
+                                      color: Colors.yellow,
+                                      fontWeight: FontWeight.bold)),
+                              SizedBox(height: 5),
+                              Text("Play Coins",
+                                  style: TextStyle(color: Colors.grey))
+                            ],
                           ),
                         ],
                       )
                     ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              /// WALLET CARD
-              Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFFA726), Color(0xFFFF7043)],
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Container(
+                // 🎁 Referral Card
+                Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF13263A),
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF2A1F5C), Color(0xFF4A2C2A)],
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Wallet Balance",
-                              style: TextStyle(color: Colors.white60)),
-                          const SizedBox(height: 5),
-                          Text("₹$walletBalance",
-                              style: const TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 20,
+                        children: const [
+                          Text("Your Referral Code",
+                              style: TextStyle(color: Colors.grey)),
+                          SizedBox(height: 5),
+                          Text("1952EW4Z",
+                              style: TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold)),
+                          SizedBox(height: 5),
+                          Text("Share & earn bonus",
+                              style: TextStyle(color: Colors.grey)),
                         ],
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                          _addBalance();
-                        },
-                        child: const Text("Add Balance"),
+                        child: const Text("SHARE",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
                       )
                     ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              /// SETTINGS LIST
-              Expanded(
-                child: ListView(
-                  children: [
-                    _menuItem(Icons.person, "Edit Profile"),
-                    _menuItem(Icons.history, "My Contests"),
-                    _menuItem(Icons.account_balance_wallet, "Transaction History"),
-                    _menuItem(Icons.settings, "Settings"),
-                    _menuItem(Icons.help, "Help & Support"),
-                    _menuItem(Icons.logout, "Logout", isLogout: true),
-                  ],
+                const Text("ACTIVITY",
+                    style: TextStyle(color: Colors.grey)),
+
+                const SizedBox(height: 10),
+
+                _menuTile(Icons.emoji_events, "My Contests"),
+                _menuTile(Icons.account_balance_wallet, "My Wallet"),
+                _menuTile(Icons.history, "Transaction History"),
+
+                const SizedBox(height: 20),
+
+                const Text("ACCOUNT",
+                    style: TextStyle(color: Colors.grey)),
+
+                const SizedBox(height: 10),
+
+                _menuTile(Icons.notifications, "Notifications"),
+                _menuTile(Icons.lock, "Security"),
+                _menuTile(Icons.help, "Help & Support"),
+
+                const SizedBox(height: 20),
+
+                // 🚪 Logout
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: const Color(0xFF1A2140),
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.logout, color: Colors.red),
+                      SizedBox(width: 10),
+                      Text("Logout",
+                          style: TextStyle(color: Colors.red)),
+                    ],
+                  ),
                 ),
-              )
-            ],
+
+                const SizedBox(height: 20),
+
+                const Center(
+                  child: Column(
+                    children: [
+                      Text("Khelo Bharat v1.0.0",
+                          style: TextStyle(color: Colors.grey)),
+                      Text("India's #1 IPL Contest App",
+                          style: TextStyle(color: Colors.grey)),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  /// ADD BALANCE FUNCTION (Demo)
-  void _addBalance() {
-    setState(() {
-      walletBalance += 100;
-    });
-  }
-
-  /// MENU ITEM
-  Widget _menuItem(IconData icon, String title, {bool isLogout = false}) {
+  Widget _menuTile(IconData icon, String title) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(2),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isLogout
-              ? [Colors.red, Colors.deepOrange]
-              : [Color(0xFF00C6FF), Color(0xFF0072FF)],
-        ),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(14),
+        color: const Color(0xFF1A2140),
       ),
-      child: InkWell(
-        onTap: () {
-          if (isLogout) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-                  (route) => false,
-            );
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("$title Clicked")),
-            );
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-          decoration: BoxDecoration(
-            color: const Color(0xFF13263A),
-            borderRadius: BorderRadius.circular(13),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.orange),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(title,
+                style: const TextStyle(color: Colors.white)),
           ),
-          child: Row(
-            children: [
-              Icon(icon, color: isLogout ? Colors.red : Colors.white),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(title,
-                    style: TextStyle(
-                        color: isLogout ? Colors.red : Colors.white)),
-              ),
-              const Icon(Icons.arrow_forward_ios,
-                  size: 14, color: Colors.white54)
-            ],
-          ),
-        ),
+          const Icon(Icons.arrow_forward_ios,
+              size: 14, color: Colors.grey)
+        ],
       ),
     );
   }
