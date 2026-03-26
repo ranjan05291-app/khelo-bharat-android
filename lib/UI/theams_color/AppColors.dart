@@ -25,15 +25,23 @@ class AppColors {
   static const Color color_deep_blue = Color(0xFF0B1A2A);
   static const Color color_deep_blue_appbar = Color(0xFF13263A);
   static const Color color_deep_blue_statusbar = Color(0xFF19324C);
-//===========================gradiant color=========
+  //===========================gradiant color=========
   // Border Gradient
   static const List<Color> borderGradient = [
     Color(0xFFFFFFFF),
     Color(0xFF0072FF),
   ];
   // Border Gradient contest
-  static const List<Color> borderGradientContestCSK = [Color(0xFFFFC107), Color(0xFFE91E63)];
+  static const List<Color> borderGradientContestCSK = [
+    Color(0xFFFFC107),
+    Color(0xFFE91E63),
+  ];
   // Border Gradient contest
-  static const List<Color> borderGradientContestMI = [Color(0xFF2196F3), Color(0xFFF44336)];
-  // Border Gradient contest
+  static const List<Color> borderGradientContestMI = [
+    Color(0xFF2196F3),
+    Color(0xFFF44336),
+  ];
+
+  static const Color shimmerColor1 = Colors.black;
+  static const Color shimmerColor2 = Color(0xFFb58416);
 }

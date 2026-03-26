@@ -21,7 +21,9 @@ class _DashboardPageState extends State<DashboardPage> {
     const Center(
       child: Text("Live Contests", style: TextStyle(color: Colors.white)),
     ),
-    const WalletScreen(), //this is demo purpose only..
+    const Center(
+      child: Text("Wallet Demo", style: TextStyle(color: Colors.white)),
+    ), //this is demo purpose only..
     const ProfileScreen(),
   ];
   String selectedlebel = "All Contests";

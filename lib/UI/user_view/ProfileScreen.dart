@@ -1,7 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  int userId = 0;
+  String? name = '';
+  String? mobile = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    // Pass any required data, or {} if none needed
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      userId = prefs.getInt('user_id') ?? 0;
+      name = prefs.getString('user_name') ?? '';
+      mobile = prefs.getString('user_mobile') ?? '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +41,6 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 // 🔙 Top Bar
                 Row(
                   children: const [
@@ -23,10 +49,11 @@ class ProfileScreen extends StatelessWidget {
                     Text(
                       "My Profile",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    )
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
 
@@ -44,19 +71,25 @@ class ProfileScreen extends StatelessWidget {
                       const CircleAvatar(
                         radius: 35,
                         backgroundColor: Colors.orange,
-                        child: Text("R",
-                            style:
-                            TextStyle(color: Colors.white, fontSize: 24)),
+                        child: Text(
+                          "R",
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
                       ),
                       const SizedBox(height: 10),
-                      const Text("Ranjan",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
+                      Text(
+                        name ?? 'N/A',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: 5),
-                      const Text("+91 7827206419",
-                          style: TextStyle(color: Colors.grey)),
+                      Text(
+                        mobile ?? 'N/A',
+                        style: TextStyle(color: Colors.grey),
+                      ),
 
                       const SizedBox(height: 20),
 
@@ -65,28 +98,38 @@ class ProfileScreen extends StatelessWidget {
                         children: const [
                           Column(
                             children: [
-                              Text("₹0.00",
-                                  style: TextStyle(
-                                      color: Colors.yellow,
-                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                "₹0.00",
+                                style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               SizedBox(height: 5),
-                              Text("Balance",
-                                  style: TextStyle(color: Colors.grey))
+                              Text(
+                                "Balance",
+                                style: TextStyle(color: Colors.grey),
+                              ),
                             ],
                           ),
                           Column(
                             children: [
-                              Text("0",
-                                  style: TextStyle(
-                                      color: Colors.yellow,
-                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                "0",
+                                style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               SizedBox(height: 5),
-                              Text("Play Coins",
-                                  style: TextStyle(color: Colors.grey))
+                              Text(
+                                "Play Coins",
+                                style: TextStyle(color: Colors.grey),
+                              ),
                             ],
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -108,39 +151,50 @@ class ProfileScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text("Your Referral Code",
-                              style: TextStyle(color: Colors.grey)),
+                          Text(
+                            "Your Referral Code",
+                            style: TextStyle(color: Colors.grey),
+                          ),
                           SizedBox(height: 5),
-                          Text("1952EW4Z",
-                              style: TextStyle(
-                                  color: Colors.orange,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            "1952EW4Z",
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           SizedBox(height: 5),
-                          Text("Share & earn bonus",
-                              style: TextStyle(color: Colors.grey)),
+                          Text(
+                            "Share & earn bonus",
+                            style: TextStyle(color: Colors.grey),
+                          ),
                         ],
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 8),
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.orange,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text("SHARE",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      )
+                        child: const Text(
+                          "SHARE",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                const Text("ACTIVITY",
-                    style: TextStyle(color: Colors.grey)),
+                const Text("ACTIVITY", style: TextStyle(color: Colors.grey)),
 
                 const SizedBox(height: 10),
 
@@ -150,8 +204,7 @@ class ProfileScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                const Text("ACCOUNT",
-                    style: TextStyle(color: Colors.grey)),
+                const Text("ACCOUNT", style: TextStyle(color: Colors.grey)),
 
                 const SizedBox(height: 10),
 
@@ -172,8 +225,7 @@ class ProfileScreen extends StatelessWidget {
                     children: const [
                       Icon(Icons.logout, color: Colors.red),
                       SizedBox(width: 10),
-                      Text("Logout",
-                          style: TextStyle(color: Colors.red)),
+                      Text("Logout", style: TextStyle(color: Colors.red)),
                     ],
                   ),
                 ),
@@ -183,13 +235,17 @@ class ProfileScreen extends StatelessWidget {
                 const Center(
                   child: Column(
                     children: [
-                      Text("Khelo Bharat v1.0.0",
-                          style: TextStyle(color: Colors.grey)),
-                      Text("India's #1 IPL Contest App",
-                          style: TextStyle(color: Colors.grey)),
+                      Text(
+                        "Khelo Bharat v1.0.0",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(
+                        "India's #1 IPL Contest App",
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -211,11 +267,9 @@ class ProfileScreen extends StatelessWidget {
           Icon(icon, color: Colors.orange),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(title,
-                style: const TextStyle(color: Colors.white)),
+            child: Text(title, style: const TextStyle(color: Colors.white)),
           ),
-          const Icon(Icons.arrow_forward_ios,
-              size: 14, color: Colors.grey)
+          const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
         ],
       ),
     );

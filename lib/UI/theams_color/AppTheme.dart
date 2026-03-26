@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'AppColors.dart';
+
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
+    fontFamily: 'Montserrat',
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.background,
 
@@ -23,9 +25,7 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.success,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     ),
   );
