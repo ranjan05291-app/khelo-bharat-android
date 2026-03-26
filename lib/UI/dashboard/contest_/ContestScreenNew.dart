@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "prize": 100,
       "entry": 82,
       "spots": "2/2",
-      "status": "Full"
+      "status": "Full",
     },
     {
       "teamA": "CSK",
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "prize": 100,
       "entry": 50,
       "spots": "1/2",
-      "status": "Open"
+      "status": "Open",
     },
     {
       "teamA": "MI",
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "prize": 200,
       "entry": 100,
       "spots": "1/2",
-      "status": "Open"
+      "status": "Open",
     },
     {
       "teamA": "KKR",
@@ -47,13 +48,34 @@ class _HomeScreenState extends State<HomeScreen> {
       "prize": 300,
       "entry": 150,
       "spots": "2/2",
-      "status": "Closed"
+      "status": "Closed",
     },
   ];
 
   List<Map<String, dynamic>> getFiltered() {
     if (selectedTab == 0) return contests;
     return contests.where((e) => e["type"] == tabs[selectedTab]).toList();
+  }
+
+  int userId = 0;
+  String? name = '';
+  String? mobile = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    // Pass any required data, or {} if none needed
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      userId = prefs.getInt('user_id') ?? 0;
+      name = prefs.getString('user_name') ?? '';
+      mobile = prefs.getString('user_mobile') ?? '';
+    });
   }
 
   @override
@@ -67,41 +89,50 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-
               /// HEADER
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("Hey, Ranjan 👋",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold)),
+                    children: [
+                      Text(
+                        "Hey, ${name!}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       SizedBox(height: 4),
-                      Text("Ready to win today?",
-                          style: TextStyle(color: Colors.white54))
+                      Text(
+                        "Ready to win today?",
+                        style: TextStyle(color: Colors.white54),
+                      ),
                     ],
                   ),
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                        color: Colors.white10,
-                        borderRadius: BorderRadius.circular(15)),
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     child: const Column(
                       children: [
-                        Text("💰 Wallet",
-                            style:
-                            TextStyle(color: Colors.white54, fontSize: 12)),
-                        Text("₹0.00",
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold))
+                        Text(
+                          "💰 Wallet",
+                          style: TextStyle(color: Colors.white54, fontSize: 12),
+                        ),
+                        Text(
+                          "₹0.00",
+                          style: TextStyle(
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
 
@@ -113,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                      colors: [Color(0xFFFF6A3D), Color(0xFF7B3FF2)]),
+                    colors: [Color(0xFFFF6A3D), Color(0xFF7B3FF2)],
+                  ),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Row(
@@ -122,17 +154,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("🏆 IPL 2026 Mega Contest",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                        Text(
+                          "🏆 IPL 2026 Mega Contest",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         SizedBox(height: 5),
-                        Text("Win big with every match. Join now!",
-                            style: TextStyle(color: Colors.white70))
+                        Text(
+                          "Win big with every match. Join now!",
+                          style: TextStyle(color: Colors.white70),
+                        ),
                       ],
                     ),
-                    Icon(Icons.sports_cricket,
-                        color: Colors.white, size: 30)
+                    Icon(Icons.sports_cricket, color: Colors.white, size: 30),
                   ],
                 ),
               ),
@@ -151,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       margin: const EdgeInsets.only(right: 10),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: selectedTab == index
                             ? Colors.orange
@@ -192,16 +230,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
                           /// TYPE
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
                             decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Text(item["type"],
-                                style: const TextStyle(color: Colors.blue)),
+                              color: Colors.blue.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              item["type"],
+                              style: const TextStyle(color: Colors.blue),
+                            ),
                           ),
 
                           const SizedBox(height: 10),
@@ -212,22 +254,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               _teamBox(item["teamA"], Colors.orange),
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text("VS",
-                                    style: TextStyle(color: Colors.white54)),
+                                child: Text(
+                                  "VS",
+                                  style: TextStyle(color: Colors.white54),
+                                ),
                               ),
                               _teamBox(item["teamB"], Colors.purple),
                               const Spacer(),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  const Text("Prize Pool",
-                                      style: TextStyle(color: Colors.white54)),
-                                  Text("₹${item["prize"]}",
-                                      style: const TextStyle(
-                                          color: Colors.amber,
-                                          fontWeight: FontWeight.bold))
+                                  const Text(
+                                    "Prize Pool",
+                                    style: TextStyle(color: Colors.white54),
+                                  ),
+                                  Text(
+                                    "₹${item["prize"]}",
+                                    style: const TextStyle(
+                                      color: Colors.amber,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
 
@@ -237,11 +286,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Starts in Started",
-                                  style: TextStyle(color: Colors.white38)),
-                              Text("Entry: ₹${item["entry"]}",
-                                  style:
-                                  const TextStyle(color: Colors.white70))
+                              const Text(
+                                "Starts in Started",
+                                style: TextStyle(color: Colors.white38),
+                              ),
+                              Text(
+                                "Entry: ₹${item["entry"]}",
+                                style: const TextStyle(color: Colors.white70),
+                              ),
                             ],
                           ),
 
@@ -259,11 +311,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(item["spots"],
-                                  style:
-                                  const TextStyle(color: Colors.white54)),
-                              Text(item["status"],
-                                  style: const TextStyle(color: Colors.red))
+                              Text(
+                                item["spots"],
+                                style: const TextStyle(color: Colors.white54),
+                              ),
+                              Text(
+                                item["status"],
+                                style: const TextStyle(color: Colors.red),
+                              ),
                             ],
                           ),
 
@@ -286,13 +341,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : "Join Now",
                               style: const TextStyle(color: Colors.white),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -304,10 +359,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.circular(10)),
-      child: Text(name,
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold)),
+        color: color,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        name,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
