@@ -16,8 +16,12 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> screens = [
     const ContestScreen(),
-    const Center(child: Text("Live Contests", style: TextStyle(color: Colors.white))),
-    const Center(child: Text("Wallet", style: TextStyle(color: Colors.white))),
+    const Center(
+      child: Text("Live Contests", style: TextStyle(color: Colors.white)),
+    ),
+    const Center(
+      child: Text("Wallet Demo", style: TextStyle(color: Colors.white)),
+    ), //this is demo purpose only..
     const ProfileScreen(),
   ];
   String selectedlebel = "All Contests";
@@ -28,21 +32,17 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         backgroundColor: AppColors.color_deep_blue_appbar,
         elevation: 0,
-        title:  Text(selectedlebel,style: TextStyle(color: Colors.white),),
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: AppColors.color_deep_blue_statusbar, // background color
-            statusBarIconBrightness: Brightness.light, // Android icons
-            statusBarBrightness: Brightness.dark, // iOS icons
-          )
+        title: Text(selectedlebel, style: TextStyle(color: Colors.white)),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor:
+              AppColors.color_deep_blue_statusbar, // background color
+          statusBarIconBrightness: Brightness.light, // Android icons
+          statusBarBrightness: Brightness.dark, // iOS icons
+        ),
       ),
-      body: SafeArea(
-        child: screens[currentIndex],
-      ),
-      bottomNavigationBar: SafeArea(
-        child: _bottomNav(),
-      ),
+      body: SafeArea(child: screens[currentIndex]),
+      bottomNavigationBar: SafeArea(child: _bottomNav()),
     );
-
   }
 
   Widget _bottomNav() {
@@ -56,16 +56,16 @@ class _DashboardPageState extends State<DashboardPage> {
         onTap: (index) {
           setState(() {
             currentIndex = index;
-            if(index==0){
+            if (index == 0) {
               selectedlebel = "All Contests";
             }
-            if(index==1){
+            if (index == 1) {
               selectedlebel = "Live Contests";
             }
-            if(index==2){
+            if (index == 2) {
               selectedlebel = "Wallet";
             }
-            if(index==3){
+            if (index == 3) {
               selectedlebel = "Profile";
             }
             //selectedlebel="";
@@ -77,10 +77,7 @@ class _DashboardPageState extends State<DashboardPage> {
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.emoji_events),
             label: "Contests",
@@ -89,15 +86,13 @@ class _DashboardPageState extends State<DashboardPage> {
             icon: Icon(Icons.account_balance_wallet),
             label: "Wallet",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );
   }
 }
+
 class ContestScreen extends StatelessWidget {
   const ContestScreen({super.key});
 
@@ -176,7 +171,9 @@ class ContestScreen extends StatelessWidget {
                   /// TEAM ROW
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 8),
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: gradient),
                       borderRadius: BorderRadius.circular(30),
@@ -186,8 +183,7 @@ class ContestScreen extends StatelessWidget {
                       children: [
                         _teamCircle(teamA),
                         const SizedBox(width: 6),
-                        const Text("VS",
-                            style: TextStyle(color: Colors.white)),
+                        const Text("VS", style: TextStyle(color: Colors.white)),
                         const SizedBox(width: 6),
                         _teamCircle(teamB),
                       ],
@@ -205,11 +201,16 @@ class ContestScreen extends StatelessWidget {
 
                   Row(
                     children: [
-                      const Icon(Icons.access_time,
-                          size: 14, color: Colors.red),
+                      const Icon(
+                        Icons.access_time,
+                        size: 14,
+                        color: Colors.red,
+                      ),
                       const SizedBox(width: 5),
-                      Text("Starts in: $time",
-                          style: const TextStyle(color: Colors.white)),
+                      Text(
+                        "Starts in: $time",
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
 
@@ -219,8 +220,7 @@ class ContestScreen extends StatelessWidget {
                   LinearProgressIndicator(
                     value: 0.5,
                     backgroundColor: Colors.white12,
-                    valueColor:
-                    AlwaysStoppedAnimation<Color>(gradient.first),
+                    valueColor: AlwaysStoppedAnimation<Color>(gradient.first),
                   ),
 
                   const SizedBox(height: 5),
@@ -228,12 +228,14 @@ class ContestScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Spots Filled: $spots",
-                          style:
-                          const TextStyle(color: Colors.white60)),
-                      const Text("1 Spot Left",
-                          style:
-                          TextStyle(color: Colors.orangeAccent)),
+                      Text(
+                        "Spots Filled: $spots",
+                        style: const TextStyle(color: Colors.white60),
+                      ),
+                      const Text(
+                        "1 Spot Left",
+                        style: TextStyle(color: Colors.orangeAccent),
+                      ),
                     ],
                   ),
                 ],
@@ -246,24 +248,33 @@ class ContestScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text("Total Prize Pool:",
-                    style: TextStyle(color: Colors.white60)),
-                Text(prize,
-                    style: const TextStyle(
-                        color: Colors.green,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
+                const Text(
+                  "Total Prize Pool:",
+                  style: TextStyle(color: Colors.white60),
+                ),
+                Text(
+                  prize,
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
 
                 const SizedBox(height: 10),
 
-                Text("Entry Fee: $fee",
-                    style: const TextStyle(color: Colors.white)),
+                Text(
+                  "Entry Fee: $fee",
+                  style: const TextStyle(color: Colors.white),
+                ),
 
                 const SizedBox(height: 10),
 
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 18, vertical: 10),
+                    horizontal: 18,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
@@ -271,12 +282,13 @@ class ContestScreen extends StatelessWidget {
                   child: const Text(
                     "JOIN NOW",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -289,11 +301,8 @@ class ContestScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       child: Text(
         team,
-        style: const TextStyle(
-            fontSize: 10, color: Colors.black),
+        style: const TextStyle(fontSize: 10, color: Colors.black),
       ),
     );
   }
-
 }
-
